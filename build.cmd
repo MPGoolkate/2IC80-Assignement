@@ -1,1 +1,1 @@
-go build -ldflags "-H=windowsgui" .\implant.go 
+go build -ldflags "-H=windowsgui" .\implant_obf.go 
