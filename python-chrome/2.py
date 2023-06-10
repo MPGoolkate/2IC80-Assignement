@@ -53,7 +53,6 @@ if (location.host == 'mail.google.com'){
 # We inject the javascript code in every tab every 3 seconds, while there is an better way to do this, the pychrome library not kinda not documented at all.
 # And since a user will probably take more than 3 seconds to composit an email, this is fine.
 
-
 while True:
     # get all tabs
     for tab in browser.list_tab():
